@@ -26,8 +26,8 @@ if length(K_subj_names) ~= length(unique(T.SN))
     error('please_copy_in_subject_names')
 end
 
-T.hand = T.hand_theta;
-remove_vars = {'hand_theta','hand_theta_maxv','hand_theta_maxradv','handMaxRadExt','hand_theta_50'};
+T.hand = T.hand_theta; % why do you have this line?
+remove_vars = {'hand_theta','hand_theta_maxv','hand_theta_maxradv','handMaxRadExt','hand_theta_50'}; % does remove_vars mean remove variables?
 T(:, T.Properties.VariableNames(remove_vars)) = [];
 
 prop_vars = {'FC_bias_X', 'FC_bias_Y', 'prop_theta'};
@@ -46,7 +46,7 @@ T2.hand(flip_idx, 1) = T1.hand(flip_idx, 1).*(-1); % Flip trials .*(-1)
 
 
 % flip proprioceptive related variables
-T2.prop_theta(flip_idx) = T2.prop_theta(flip_idx).*(-1);
+T2.prop_theta(flip_idx) = T2.prop_theta(flip_idx).*(-1); % is there an iterative way to do this? like have the variables in an array and multiply -1 to each of them?
 T2.FC_X(flip_idx) = T2.FC_X(flip_idx).*(-1);
 T2.HL_X(flip_idx) = T2.HL_X(flip_idx).*(-1);
 T2.FC_bias_X(flip_idx) = T2.FC_bias_X(flip_idx).*(-1);
@@ -84,7 +84,7 @@ for SN = unique(T3.SN)'
     end
 end
 
-K_lines_all_trials = [9.5 36.5 72.5 108.5 144.5 180.5 270.5 360.5 396.5 486.5 522.5 612.5 648.5 738.5];
+K_lines_all_trials = [9.5 36.5 72.5 108.5 144.5 180.5 270.5 360.5 396.5 486.5 522.5 612.5 648.5 738.5]; % off-set to prevent any datapoints from being occluded
 
 % FOR REFERENCE
 % % % In cycles
