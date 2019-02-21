@@ -1,10 +1,10 @@
-%% Load and clean Data
+%% Set directory
 clearvars
-addpath(genpath('..')) % adding functions to path
-
+addpath(genpath('..'))
 % save figures here
 figDir = '../Figures/';
 
+%% Load and clean Data
 load('pre-processed_data/AlissaPropEC_trials.mat')
 
 K_subj_names = {'PropVMR_602A__S53A', 'PropVMR_602A__S54A', ... % begin day 1
@@ -233,12 +233,13 @@ for si = 1:length(subj)
         disp_idx=[];
 %         disp_idx = subj_day_idx & ~isnan(E.PB);
         disp_idx = subj_day_idx & E.PB > 2 ;
-        dispAll(sdi,1) = dispersion2(E.FC_bias_X(block1_idx), E.FC_bias_Y(block1_idx), E.FC_bias_X(disp_idx), E.FC_bias_Y(disp_idx));
+        dispAll(sdi,1) = dispersion( E.FC_bias_X(disp_idx), E.FC_bias_Y(disp_idx));
+        dispAll2(sdi,1) = dispersion2(E.FC_bias_X(block1_idx), E.FC_bias_Y(block1_idx), E.FC_bias_X(disp_idx), E.FC_bias_Y(disp_idx));
     end
 end
 % Summary table
 % reliabilityMatrix = table(afterEffect, propShiftX, propShiftTheta, dispBlock1, dispAll);
-reliabilityMatrix = table(dispBlock1, afterEffect, propShiftTheta, dispAll);
+reliabilityMatrix = table(dispBlock1, afterEffect, propShiftTheta, dispAll, dispAll2);
 
 day1Matrix = reliabilityMatrix(Day==1,:);
 day2Matrix = reliabilityMatrix(Day==2,:);
@@ -387,5 +388,3 @@ end
 
 xticks = [1:6];
 set(gca,'xTick',xticks,'xticklabel',barVarNames,'ylim',[-30 60],'xticklabelrotation',45);
-
-ttest1(summaryBar.propShiftTheta)
