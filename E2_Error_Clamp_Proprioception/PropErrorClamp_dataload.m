@@ -55,11 +55,11 @@ Outlier_ = @(x,Niqr) (abs(x-nanmean(nanmedian(x))) > Niqr*nanmean(iqr(x)));
 % loop through all subjects
 for s = num_tested_subj+1:length(subj)
         
-    s % why do you have this line?
+    s 
     subj{s}
     load(fullfile(dataDir,[subj{s}, '.mat']));
     
-    S = []; % maybe rename the variable to like subjects be more explicit instead?
+    S = [];
     
     S.hand_x = nan(nt,maxReachTime);     % game loop ran at 1000 hz
     S.hand_y = nan(nt,maxReachTime);
@@ -70,7 +70,7 @@ for s = num_tested_subj+1:length(subj)
     S.tgtpos(1:nt,1) = [tgtloc(1,1)-xCenter];
     S.tgtpos(1:nt,2) = [yCenter-tgtloc(1,2)];
     
-    V = []; % is there a reason these particular letters were used?
+    V = [];
     Z = [];
 
     Z.move_trial = trial_move;
